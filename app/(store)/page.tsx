@@ -1,4 +1,5 @@
 import ProductsView from "@/components/ProductsView";
+import WhiteFridayBanner from "@/components/WhiteFridayBanner";
 import { Product } from "@/sanity.types";
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
 import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
@@ -14,9 +15,11 @@ export default async function Home() {
   // );
   return (
     <div>
+      {/* White Friday Banner */}
+      <WhiteFridayBanner />
       {/* Render all the products */}
 
-      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
+      <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
         <ProductsView products={products} categories={categories} />
       </div>
     </div>
