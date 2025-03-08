@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Header from "@/components/Header";
+import { SanityLive } from "@/sanity/lib/live";
 
 export const metadata: Metadata = {
   title: "Aqua",
@@ -18,7 +19,10 @@ export default function RootLayout({
       <html lang="en">
         <body className={`antialiased`}>
           <Header />
-          <main>{children}</main>
+          <main>
+            {children}
+            <SanityLive />
+          </main>
         </body>
       </html>
     </ClerkProvider>
