@@ -10,10 +10,15 @@ import {
 import Link from "next/link";
 import Form from "next/form";
 import { PackageIcon, TrolleyIcon } from "@sanity/icons";
+import useBasketStore from "@/state/store";
 
 // We need access to the user.
 function Header() {
   const { user } = useUser();
+
+  const itemCount = useBasketStore((state) =>
+    state.items.reduce((total, item) => total + item.quantity, 0),
+  );
 
   // Create a passkey for the clerk.
 
@@ -54,6 +59,9 @@ function Header() {
           >
             <TrolleyIcon className="h-6 w-6" />
             {/* Span item count once global state is implemented */}
+            <span className="absolute top-[-5px] right-[-15px] inline-flex items-center justify-center rounded-full bg-red-500 px-2 py-1 text-xs leading-none font-bold text-white">
+              {itemCount}
+            </span>
 
             <span>My Basket</span>
           </Link>
