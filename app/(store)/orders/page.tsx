@@ -12,7 +12,7 @@ async function OrderPage() {
 
   const orders = await getMyOrders(userId);
 
-  console.log(orders.length);
+  // console.log(orders.length);
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">

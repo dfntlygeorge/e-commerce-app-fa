@@ -68,7 +68,7 @@ function SuccessPage() {
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Button asChild className="bg-green-600 hover:bg-green-700">
-              <Link href="/order">View Order Details</Link>
+              <Link href="/orders">View Order Details</Link>
             </Button>
             <Button asChild variant="outline">
               <Link href="/">Continue Shopping</Link>
