@@ -4,7 +4,7 @@ import { searchProductsByName } from "@/sanity/lib/products/searchProductsByName
 async function SearchPage({
   searchParams,
 }: {
-  searchParams: { query: string };
+  searchParams: Promise<{ query: string }>;
 }) {
   // we need to destruct the query from the searchParams object. Also we need to await it for nextjs 15.
   const { query } = await searchParams;

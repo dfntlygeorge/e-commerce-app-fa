@@ -142,7 +142,7 @@ export const orderType = defineType({
         : "No Order ID";
       return {
         title: `${select.name} (${orderIdSnippet})`,
-        subtitle: `${select.amount} ${select.currency}, ${select.email}`,
+        subtitle: `${select.currency.charAt(0).toUpperCase()}${select.currency.slice(1)} ${select.amount}, ${select.email}`,
         media: BasketIcon,
       };
     },

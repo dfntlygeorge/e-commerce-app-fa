@@ -1,16 +1,23 @@
 import AddToBasketButton from "@/components/AddToBasketButton";
-import { Button } from "@/components/ui/button";
 import { imageUrl } from "@/lib/imageUrl";
 import { getProductBySlug } from "@/sanity/lib/products/getProductBySlug";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+export const dynamic = "force-static";
+export const revalidate = 60;
+
 async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
-  console.log("Fetched product by slug details: ", product);
 
+  // console.log("Fetched product by slug details: ", product);
+
+  console.log(
+    crypto.randomUUID().slice(0, 5) +
+      `>>> Rendered product page for cache for ${slug}`,
+  );
   if (!product) {
     return notFound();
   }
@@ -27,7 +34,7 @@ async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
               src={imageUrl(product.image).url()}
               alt={product.name || "Product Image"}
               fill
-              className="object-contain transition-transform duration-300 hover:scale-105"
+              className="object-cover transition-transform duration-300 hover:scale-105"
             />
           )}
 
@@ -52,7 +59,6 @@ async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
           </div>
           <div className="mt-6">
             <AddToBasketButton product={product} disabled={isOutOfStock} />
-            <Button>Add to Cart</Button>
           </div>
         </div>
       </div>
