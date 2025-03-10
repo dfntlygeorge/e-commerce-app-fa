@@ -11,6 +11,8 @@ import Link from "next/link";
 import Form from "next/form";
 import { PackageIcon, TrolleyIcon } from "@sanity/icons";
 import useBasketStore from "@/state/store";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 
 // We need access to the user.
 function Header() {
@@ -35,46 +37,51 @@ function Header() {
     <header className="flex flex-wrap items-center justify-between px-4 py-2">
       {/* Top row */}
       <div className="flex w-full flex-wrap items-center justify-between">
-        <Link
-          href="/"
-          className="mx-auto cursor-pointer text-2xl font-bold text-blue-500 hover:opacity-50 sm:px-0"
-        >
-          Aqua
-        </Link>
+        <Button asChild variant="link" className="mx-auto text-2xl font-bold">
+          <Link href="/">Aqua</Link>
+        </Button>
         <Form
           action="/search"
-          className="mt-2 w-full sm:mx-4 sm:mt-0 sm:w-auto sm:flex-1"
+          className="mt-2 flex w-full sm:mx-4 sm:mt-0 sm:w-auto sm:flex-1"
         >
-          <input
+          <Input
             type="text"
             name="query"
             placeholder="Search something..."
-            className="focus:ring-opacity-50 w-full max-w-4xl rounded border bg-gray-100 px-4 py-2 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+            className="max-w-4xl flex-1"
           />
+          <Button
+            type="submit"
+            variant="secondary"
+            className="ml-2 cursor-pointer"
+          >
+            Search
+          </Button>
         </Form>
         <div className="mt-4 flex flex-1 items-center space-x-4 sm:mt-0 sm:flex-none">
           <Link
             href="/basket"
-            className="relative flex flex-1 items-center justify-center space-x-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 sm:flex-none sm:justify-start"
+            className="relative flex items-center gap-2 rounded-md bg-zinc-900 px-4 py-2 font-semibold text-zinc-100 transition-colors hover:bg-zinc-800"
           >
             <TrolleyIcon className="h-6 w-6" />
-            {/* Span item count once global state is implemented */}
-            <span className="absolute top-[-5px] right-[-15px] inline-flex items-center justify-center rounded-full bg-red-500 px-2 py-1 text-xs leading-none font-bold text-white">
-              {itemCount}
-            </span>
-
-            <span>My Basket</span>
+            {itemCount > 0 && (
+              <span className="absolute -top-1.5 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[12px] font-bold text-white">
+                {itemCount}
+              </span>
+            )}
+            <span className="hidden sm:inline-block">My Basket</span>
           </Link>
+
           {/* User area */}
           {/* dont load unless clerk initialize it. */}
           <ClerkLoaded>
             <SignedIn>
               <Link
                 href="/orders"
-                className="relative flex flex-1 items-center justify-center space-x-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 sm:flex-none sm:justify-start"
+                className="relative flex flex-1 items-center justify-center gap-2 rounded-md bg-zinc-900 px-4 py-2 font-semibold text-zinc-100 transition-colors hover:bg-zinc-800 sm:flex-none sm:justify-start"
               >
                 <PackageIcon className="h-6 w-6" />
-                <span>My Orders</span>
+                <span className="text-sm sm:text-base">My Orders</span>
               </Link>
             </SignedIn>
 
@@ -83,7 +90,7 @@ function Header() {
               <div className="flex items-center space-x-2">
                 <UserButton />
                 <div className="hidden text-xs sm:block">
-                  <p className="text-gray-400">Welcome Back</p>
+                  <p className="text-gray-400">Happy shopping</p>
                   <p className="font-bold">{user.fullName}!</p>
                 </div>
               </div>
