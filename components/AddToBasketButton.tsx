@@ -28,7 +28,7 @@ function AddToBasketButton({
           className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 ${
             itemCount === 0
               ? "bg-muted text-muted-foreground cursor-not-allowed" // Disabled: muted colors
-              : "bg-destructive text-destructive-foreground hover:bg-destructive/90 cursor-pointer shadow-md active:scale-95"
+              : "bg-destructive hover:bg-destructive/90 cursor-pointer text-white shadow-md active:scale-95"
           }`}
           onClick={() => removeItem(product._id)}
           disabled={itemCount === 0 || disabled}

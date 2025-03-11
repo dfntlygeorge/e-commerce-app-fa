@@ -49,7 +49,7 @@ export default function ChatToggle({
       {isOpen && (
         <div
           ref={chatRef} // 🔹 Assign ref to the chat container
-          className="fixed right-16 bottom-16 z-50 w-[350px]"
+          className="xs:bottom-16 xs:right-16 xs:w-[350px] xs:h-auto xs:rounded-lg xs:shadow-lg fixed right-0 bottom-0 z-40 h-full w-full transition-all duration-300 ease-in-out"
         >
           <ShoppingAssistant products={products} />
         </div>
