@@ -8,6 +8,8 @@ import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { draftMode } from "next/headers";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { ModeToggle } from "@/components/ModeToggle";
+import { getProductsWithCategories } from "@/sanity/lib/products/getAllProductsWithExpandedCategories";
+import ChatToggle from "@/components/shopping-assistant/ChatToggle";
 
 export const metadata: Metadata = {
   title: "Aqua",
@@ -19,6 +21,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const productsWithCategories = await getProductsWithCategories();
+
   return (
     <ClerkProvider dynamic>
       <html lang="en" suppressHydrationWarning>
@@ -40,6 +44,7 @@ export default async function RootLayout({
                 <DisableDraftMode />
               </>
             )}
+            <ChatToggle products={productsWithCategories} />
             <ModeToggle />
           </ThemeProvider>
         </body>
