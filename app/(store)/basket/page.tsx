@@ -12,6 +12,7 @@ import {
   createCheckoutSession,
   Metadata,
 } from "@/actions/createCheckoutSession";
+import { Button } from "@/components/ui/button";
 
 function BasketPage() {
   const groupedItems = useBasketStore((state) => state.getGroupedItems());
@@ -29,8 +30,10 @@ function BasketPage() {
   if (groupedItems.length === 0) {
     return (
       <div className="container mx-auto flex min-h-[50vh] flex-col items-center justify-center px-4">
-        <h1 className="mb-6 text-2xl font-bold text-gray-600">Your basket</h1>
-        <p className="text-gray text-lg">Your basket is empty</p>
+        <h1 className="text-muted-foreground mb-6 text-2xl font-bold">
+          Your basket
+        </h1>
+        <p className="text-muted-foreground text-lg">Your basket is empty</p>
       </div>
     );
   }
@@ -109,16 +112,18 @@ function BasketPage() {
             </div>
           ))}
         </div>
-        <div className="fixed bottom-0 left-0 order-first h-fit w-full rounded border bg-white p-6 lg:sticky lg:top-4 lg:left-auto lg:order-last lg:w-80">
-          <h3 className="text-xl font-semibold">Order Summary</h3>
+        <div className="border-border bg-card fixed bottom-0 left-0 order-first h-fit w-full rounded-md border p-6 shadow-md lg:sticky lg:top-4 lg:left-auto lg:order-last lg:w-80">
+          <h3 className="text-foreground text-xl font-semibold">
+            Order Summary
+          </h3>
           <div className="mt-4 space-y-2">
-            <p className="flex justify-between">
+            <p className="text-muted-foreground flex justify-between">
               <span>Items:</span>
               <span>
                 {groupedItems.reduce((total, item) => total + item.quantity, 0)}
               </span>
             </p>
-            <p className="flex justify-between border-t pt-2 text-2xl font-bold">
+            <p className="border-border text-foreground flex justify-between border-t pt-2 text-2xl font-bold">
               <span>Total:</span>
               <span>
                 P{useBasketStore.getState().getTotalPrice().toFixed(2)}
@@ -126,21 +131,20 @@ function BasketPage() {
             </p>
           </div>
           {isSignedIn ? (
-            <button
+            <Button
               onClick={handleCheckout}
               disabled={isLoading}
-              className={`mt-4 w-full rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:text-gray-400 ${isLoading ? "cursor-not-allowed" : "cursor-pointer"}`}
+              className="mt-4 w-full cursor-pointer"
             >
               {isLoading ? "Processing..." : "Checkout"}
-            </button>
+            </Button>
           ) : (
             <SignInButton mode="modal">
-              <button className="mt-4 w-full cursor-pointer rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600">
-                Sign in to Checkout
-              </button>
+              <Button className="mt-4 w-full">Sign in to Checkout</Button>
             </SignInButton>
           )}
         </div>
+
         <div className="h-64 lg:h-0">
           {/* Spacer for scrolling on mobile */}
         </div>

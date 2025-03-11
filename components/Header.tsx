@@ -23,7 +23,6 @@ function Header() {
   );
 
   // Create a passkey for the clerk.
-
   const createClerkPasskey = async () => {
     try {
       const res = await user?.createPasskey();
@@ -58,50 +57,54 @@ function Header() {
             Search
           </Button>
         </Form>
-        <div className="mt-4 flex flex-1 items-center space-x-4 sm:mt-0 sm:flex-none">
-          <Link
-            href="/basket"
-            className="relative flex items-center gap-2 rounded-md bg-zinc-900 px-4 py-2 font-semibold text-zinc-100 transition-colors hover:bg-zinc-800"
-          >
-            <TrolleyIcon className="h-6 w-6" />
-            {itemCount > 0 && (
-              <span className="absolute -top-1.5 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[12px] font-bold text-white">
-                {itemCount}
-              </span>
-            )}
-            <span className="hidden sm:inline-block">My Basket</span>
-          </Link>
+        <div className="mt-4 flex flex-1 items-center justify-end space-x-4 sm:mt-0 sm:flex-none">
+          <Button className="relative" asChild>
+            <Link
+              href="/basket"
+              className="flex items-center gap-2 font-semibold"
+            >
+              <TrolleyIcon className="h-6 w-6" />
+              {itemCount > 0 && (
+                <span className="absolute -top-1.5 -right-3 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[12px] font-bold text-white">
+                  {itemCount}
+                </span>
+              )}
+              <span className="xs:inline-block hidden">My Basket</span>
+            </Link>
+          </Button>
 
           {/* User area */}
-          {/* dont load unless clerk initialize it. */}
           <ClerkLoaded>
             <SignedIn>
-              <Link
-                href="/orders"
-                className="relative flex flex-1 items-center justify-center gap-2 rounded-md bg-zinc-900 px-4 py-2 font-semibold text-zinc-100 transition-colors hover:bg-zinc-800 sm:flex-none sm:justify-start"
-              >
-                <PackageIcon className="h-6 w-6" />
-                <span className="text-sm sm:text-base">My Orders</span>
-              </Link>
+              <Button asChild>
+                <Link
+                  href="/orders"
+                  className="relative flex flex-1 items-center gap-2 font-semibold"
+                >
+                  <PackageIcon className="h-6 w-6" />
+                  <span className="text-sm sm:text-base">My Orders</span>
+                </Link>
+              </Button>
             </SignedIn>
 
             {/* If user is not logged in, show login button */}
             {user ? (
               <div className="flex items-center space-x-2">
                 <UserButton />
-                <div className="hidden text-xs sm:block">
-                  <p className="text-gray-400">Happy shopping</p>
+                <div className="hidden text-xs lg:block">
+                  <p className="text-muted-foreground">Happy shopping</p>
                   <p className="font-bold">{user.fullName}!</p>
                 </div>
               </div>
             ) : (
               <SignInButton mode="modal" />
             )}
-            {/* if the user has no passkey */}
+
+            {/* If the user has no passkey */}
             {user?.passkeys.length === 0 && (
               <button
                 onClick={createClerkPasskey}
-                className="animate-pulse rounded border border-blue-300 bg-white px-4 py-2 font-bold text-blue-500 hover:bg-blue-700 hover:text-white"
+                className="border-primary bg-background text-primary hover:bg-primary hover:text-primary-foreground animate-pulse cursor-pointer rounded border px-4 py-2 font-bold"
               >
                 Create passkey
               </button>

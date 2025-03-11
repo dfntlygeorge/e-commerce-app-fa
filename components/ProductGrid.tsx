@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import ProductThumb from "./ProductThumb";
 
 function ProductGrid({ products }: { products: Product[] }) {
-  console.log("Products data:", products);
-  console.log(
-    "Array ba sha kase if hinde hindi map is not function: ",
-    Array.isArray(products),
-  );
-  console.log("Type of products: ", typeof products);
+  // console.log("Products data:", products);
+  // console.log(
+  //   "Array ba sha kase if hinde hindi map is not function: ",
+  //   Array.isArray(products),
+  // );
+  // console.log("Type of products: ", typeof products);
 
   return (
     <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

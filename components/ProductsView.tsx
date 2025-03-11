@@ -19,7 +19,7 @@ function ProductsView({ products, categories }: ProductsViewProps) {
       <div className="flex-1">
         <div>
           <ProductGrid products={products} />
-          <hr className="w-1/2 sm:w-3/4" />
+          <hr className="mt-3 w-1/2 sm:mt-4 sm:w-3/4" />
         </div>
       </div>
     </div>

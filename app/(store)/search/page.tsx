@@ -12,12 +12,12 @@ async function SearchPage({
 
   if (!products.length) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
-        <div className="w-full max-w-4xl rounded-lg bg-white p-8 shadow-md">
-          <h1 className="mb-6 text-center text-3xl font-bold">
-            No products found for: {query}
+      <div className="bg-background flex min-h-screen flex-col items-center justify-center p-6">
+        <div className="border-border bg-card w-full max-w-3xl rounded-2xl border p-10 text-center shadow-lg">
+          <h1 className="text-foreground mb-4 text-2xl font-bold">
+            No products found for: <span className="text-primary">{query}</span>
           </h1>
-          <p className="text-center text-gray-600">
+          <p className="text-muted-foreground">
             Try searching with different keywords or check back later.
           </p>
         </div>
@@ -26,10 +26,10 @@ async function SearchPage({
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
-      <div className="w-full max-w-4xl rounded-lg bg-white p-8 shadow-md">
-        <h1 className="mb-6 text-center text-3xl font-bold">
-          Search results for: {query}
+    <div className="bg-background flex min-h-screen flex-col items-center justify-start p-6">
+      <div className="border-border bg-card w-full max-w-4xl rounded-2xl border p-8 shadow-lg">
+        <h1 className="text-foreground mb-6 text-center text-3xl font-bold">
+          Search results for: <span className="text-primary">{query}</span>
         </h1>
         <ProductGrid products={products} />
       </div>

@@ -28,5 +28,5 @@ export default async function Page({
       : undefined,
   );
 
-  return <h1>{data.title}</h1>;
+  return <h1>{data?.title}</h1>;
 }

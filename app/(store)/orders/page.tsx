@@ -15,35 +15,37 @@ async function OrderPage() {
   // console.log(orders.length);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-100 p-4">
-      <div className="w-full max-w-4xl rounded-xl bg-white p-4 shadow-lg sm:p-8">
-        <h1 className="mb-8 text-4xl font-bold tracking-tight text-gray-900">
+    <div className="bg-background flex min-h-screen flex-col items-center justify-center p-4">
+      <div className="bg-card w-full max-w-4xl rounded-xl p-4 shadow-lg sm:p-8">
+        <h1 className="text-foreground mb-8 text-4xl font-bold tracking-tight">
           My Orders
         </h1>
 
         {orders.length === 0 ? (
-          <div className="text-center text-gray-600">
-            <p> You have not placed any orders yet.</p>
+          <div className="text-muted-foreground text-center">
+            <p>You have not placed any orders yet.</p>
           </div>
         ) : (
           <div className="space-y-6 sm:space-y-8">
             {orders.map((order) => (
               <div
                 key={order.orderNumber}
-                className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm"
+                className="border-border bg-card overflow-hidden rounded-lg border shadow-sm"
               >
-                <div className="border-b border-gray-200 p-4 sm:p-6">
+                <div className="border-border border-b p-4 sm:p-6">
                   <div className="mb-4 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                     <div>
-                      <p className="mb-1 text-sm font-bold text-gray-600">
+                      <p className="text-muted-foreground mb-1 text-sm font-bold">
                         Order Number
                       </p>
-                      <p className="font-mono text-sm break-all text-green-600">
+                      <p className="text-primary font-mono text-sm break-all">
                         {order.orderNumber}
                       </p>
                     </div>
                     <div className="sm:text-right">
-                      <p className="mb-1 text-sm text-gray-600">Order Date</p>
+                      <p className="text-muted-foreground mb-1 text-sm">
+                        Order Date
+                      </p>
                       <p className="font-medium">
                         {order.orderDate
                           ? new Date(order.orderDate).toDateString()
@@ -58,15 +60,17 @@ async function OrderPage() {
                       <span
                         className={`rounded-full px-3 py-1 text-sm ${
                           order.status === "paid"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-gray-100 text-gray-800"
+                            ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
+                            : "bg-muted text-muted-foreground"
                         }`}
                       >
                         {order.status}
                       </span>
                     </div>
                     <div className="sm:text-right">
-                      <p className="mb-1 text-sm text-gray-600">Total Amount</p>
+                      <p className="text-muted-foreground mb-1 text-sm">
+                        Total Amount
+                      </p>
                       <p className="text-lg font-bold">
                         {formatCurrency(order.totalPrice ?? 0, order.currency)}
                       </p>
@@ -74,12 +78,12 @@ async function OrderPage() {
                   </div>
 
                   {order.amountDiscount ? (
-                    <div className="mt-4 rounded-lg bg-red-50 p-3 sm:p-4">
-                      <p className="mb-1 text-sm font-medium text-red-600 sm:text-base">
+                    <div className="bg-destructive/10 mt-4 rounded-lg p-3 sm:p-4">
+                      <p className="text-destructive mb-1 text-sm font-medium sm:text-base">
                         Discount Applied:{" "}
                         {formatCurrency(order.amountDiscount, order.currency)}
                       </p>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-muted-foreground text-sm">
                         Original Subtotal:{" "}
                         {formatCurrency(
                           (order.totalPrice ?? 0) + order.amountDiscount,
@@ -90,14 +94,14 @@ async function OrderPage() {
                   ) : null}
                 </div>
                 <div className="px-4 py-3 sm:px-6 sm:py-4">
-                  <p className="mb-3 text-sm font-semibold text-gray-600 sm:mb-4">
+                  <p className="text-muted-foreground mb-3 text-sm font-semibold sm:mb-4">
                     Order Items
                   </p>
                   <div className="space-y-3">
                     {order.products?.map((product) => (
                       <div
                         key={product.product?._id}
-                        className="flex flex-col gap-3 border-b py-2 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
+                        className="border-border flex flex-col gap-3 border-b py-2 last:border-b-0 sm:flex-row sm:items-center sm:justify-between"
                       >
                         <div className="flex items-center gap-3 sm:gap-4">
                           {product.product?.image && (
@@ -115,7 +119,7 @@ async function OrderPage() {
                             <p className="text-sm font-medium sm:text-base">
                               {product.product?.name}
                             </p>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-muted-foreground text-sm">
                               Quantity: {product.quantity ?? "N/A"}
                             </p>
                           </div>

@@ -1,8 +1,8 @@
 "use client";
 
 import { Category } from "@/sanity.types";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { Button } from "./button";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { cn } from "@/lib/utils";
@@ -15,6 +15,7 @@ import {
   CommandInput,
 } from "./command";
 import { ChevronsUpDown, Check } from "lucide-react";
+import useCategoryStore from "@/state/category";
 
 interface CategorySelectorProps {
   categories: Category[];
@@ -24,20 +25,27 @@ export function CategorySelectorComponent({
   categories,
 }: CategorySelectorProps) {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState<string>("");
+  const pathname = usePathname(); // Get the current pathname
+  const { selectedCategory, setSelectedCategory } = useCategoryStore(); // Use Zustand store
   const router = useRouter();
-  console.log(categories);
+  // console.log(categories);
+
+  useEffect(() => {
+    if (!pathname.startsWith("/categories")) {
+      setSelectedCategory(null); // Reset Zustand state
+    }
+  }, [pathname, setSelectedCategory]);
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          variant="ghost"
           role="combobox"
           aria-expanded={open}
-          className="relative flex w-full max-w-full cursor-pointer items-center justify-center space-x-2 rounded bg-zinc-800 px-4 py-2 font-bold text-zinc-100 hover:bg-zinc-700 hover:text-zinc-100 sm:flex-none sm:justify-start"
+          className="relative flex w-full max-w-full cursor-pointer items-center justify-center space-x-2 rounded font-bold sm:flex-none sm:justify-start"
         >
-          {value
-            ? categories.find((category) => category._id === value)?.title
+          {selectedCategory
+            ? categories.find((category) => category._id === selectedCategory)
+                ?.title
             : "Select a category"}
           <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0" />
         </Button>
@@ -55,7 +63,7 @@ export function CategorySelectorComponent({
                     .includes(e.currentTarget.value.toLowerCase()),
                 );
                 if (selectedCategory?.slug?.current) {
-                  setValue(selectedCategory._id);
+                  setSelectedCategory(selectedCategory._id);
                   router.push(`/categories/${selectedCategory.slug.current}`);
                   setOpen(false);
                 }
@@ -70,7 +78,9 @@ export function CategorySelectorComponent({
                   key={category._id}
                   value={category.title}
                   onSelect={() => {
-                    setValue(value === category._id ? "" : category._id);
+                    setSelectedCategory(
+                      selectedCategory === category._id ? "" : category._id,
+                    );
                     router.push(`/categories/${category.slug?.current}`);
                     setOpen(false);
                   }}
@@ -79,7 +89,9 @@ export function CategorySelectorComponent({
                   <Check
                     className={cn(
                       "ml-auto h-4 w-4",
-                      value === category._id ? "opacity-100" : "opacity-0",
+                      selectedCategory === category._id
+                        ? "opacity-100"
+                        : "opacity-0",
                     )}
                   />
                 </CommandItem>

@@ -16,26 +16,27 @@ function AddToBasketButton({
   const [isClient, setIsClient] = useState(false);
   const currentStock = product.stock;
 
-  // Use useEffect to set isClient to true when the component mounts
-  // This ensures that the component only renders on the client side
-  // preventing hydration errors due to server/client mismatch
+  // Ensure the component only renders on the client side
   useEffect(() => setIsClient(true), []);
 
   if (!isClient) return null;
+
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-center space-x-2">
         <button
           className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 ${
             itemCount === 0
-              ? "cursor-not-allowed bg-gray-300 text-gray-500" // Disabled: soft gray
-              : "cursor-pointer bg-red-500 text-white shadow-md hover:bg-red-600 active:scale-95"
+              ? "bg-muted text-muted-foreground cursor-not-allowed" // Disabled: muted colors
+              : "bg-destructive text-destructive-foreground hover:bg-destructive/90 cursor-pointer shadow-md active:scale-95"
           }`}
           onClick={() => removeItem(product._id)}
           disabled={itemCount === 0 || disabled}
         >
           <span
-            className={`text-xl font-bold ${itemCount === 0 ? "text-gray-400" : ""}`}
+            className={`text-xl font-bold ${
+              itemCount === 0 ? "text-muted-foreground" : ""
+            }`}
           >
             -
           </span>
@@ -44,8 +45,8 @@ function AddToBasketButton({
         <button
           className={`flex h-8 w-8 items-center justify-center rounded-full transition-all duration-200 ${
             disabled || itemCount === currentStock
-              ? "cursor-not-allowed bg-gray-300 text-gray-500" // Disabled state: softer gray
-              : "cursor-pointer bg-zinc-900 text-white shadow-md hover:bg-zinc-800 active:scale-95"
+              ? "bg-muted text-muted-foreground cursor-not-allowed"
+              : "bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer shadow-md active:scale-95"
           }`}
           onClick={() => addItem(product)}
           disabled={disabled || itemCount === currentStock}
@@ -55,7 +56,7 @@ function AddToBasketButton({
       </div>
       <div className="h-4">
         {itemCount === currentStock && (
-          <p className="text-center text-xs text-gray-500">
+          <p className="text-muted-foreground text-center text-xs">
             Maximum quantity reached
           </p>
         )}

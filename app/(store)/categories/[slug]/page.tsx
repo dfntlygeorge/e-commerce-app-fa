@@ -14,12 +14,12 @@ async function CategoriesPage({
 
   if (!products.length) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
-        <div className="w-full max-w-4xl rounded-lg bg-white p-8 shadow-md">
+      <div className="bg-background flex min-h-screen flex-col items-center justify-start p-4">
+        <div className="bg-card text-card-foreground w-full max-w-4xl rounded-lg p-8 shadow-md">
           <h1 className="mb-6 text-center text-3xl font-bold">
             No products found for: {slug.replace("-", " ")}
           </h1>
-          <p className="text-center text-gray-600">
+          <p className="text-muted-foreground text-center">
             Try selecting a different category or check back later.
           </p>
           <ProductsView products={products} categories={categories} />
@@ -29,8 +29,8 @@ async function CategoriesPage({
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
-      <div className="w-full max-w-4xl rounded-lg bg-white p-8 shadow-md">
+    <div className="bg-background flex min-h-screen flex-col items-center justify-start p-4">
+      <div className="bg-card text-card-foreground w-full max-w-4xl rounded-lg p-8 shadow-md">
         <h1 className="mb-6 text-center text-3xl font-bold">
           {slug
             .split("-")

@@ -22,7 +22,7 @@ export default async function Home() {
       <WhiteFridayBanner />
       {/* Render all the products */}
 
-      <div className="flex min-h-screen flex-col items-center justify-start bg-gray-100 p-4">
+      <div className="flex min-h-screen flex-col items-center justify-start p-4">
         <ProductsView products={products} categories={categories} />
       </div>
     </div>

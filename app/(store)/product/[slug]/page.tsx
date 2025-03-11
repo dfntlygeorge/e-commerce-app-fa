@@ -12,17 +12,17 @@ async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const product = await getProductBySlug(slug);
 
-  // console.log("Fetched product by slug details: ", product);
-
   console.log(
     crypto.randomUUID().slice(0, 5) +
       `>>> Rendered product page for cache for ${slug}`,
   );
+
   if (!product) {
     return notFound();
   }
 
   const isOutOfStock = product.stock != null && product.stock <= 0;
+
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -39,19 +39,23 @@ async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
           )}
 
           {isOutOfStock && (
-            <div className="absolute inset-0 flex items-center justify-center bg-gray-900 opacity-50">
-              <span className="text-lg font-bold text-white">Out of stock</span>
+            <div className="bg-muted/70 absolute inset-0 flex items-center justify-center">
+              <span className="text-muted-foreground text-lg font-bold">
+                Out of stock
+              </span>
             </div>
           )}
         </div>
         <div className="flex flex-col justify-between">
           <div>
-            <h1 className="mb-4 text-3xl font-bold">{product.name}</h1>
-            <div className="mb-4 text-xl font-semibold">
+            <h1 className="text-foreground mb-4 text-3xl font-bold">
+              {product.name}
+            </h1>
+            <div className="text-primary mb-4 text-xl font-semibold">
               P{product.price?.toFixed(2)}
             </div>
-            {/* How to render a markdown data to html */}
-            <div className="prose mb-6 max-w-none">
+            {/* Render markdown description */}
+            <div className="prose prose-sm dark:prose-invert text-muted-foreground mb-6">
               {Array.isArray(product.description) && (
                 <PortableText value={product.description} />
               )}
