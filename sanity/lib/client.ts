@@ -9,8 +9,8 @@ export const client = createClient({
   useCdn: true,
   token: process.env.SANITY_API_READ_TOKEN,
   stega: {
-    studioUrl: process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}/studio`
+    studioUrl: process.env.DOMAIN_URL
+      ? `https://${process.env.DOMAIN_URL}/studio`
       : `${process.env.NEXT_PUBLIC_BASE_URL}/studio`,
   },
 

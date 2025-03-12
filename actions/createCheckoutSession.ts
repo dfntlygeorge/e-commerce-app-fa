@@ -40,7 +40,7 @@ export async function createCheckoutSession(
     }
     const baseUrl =
       process.env.NODE_ENV === "production"
-        ? `https://${process.env.VERCEL_URL}`
+        ? `https://${process.env.DOMAIN_URL}`
         : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
 
     const session = await stripe.checkout.sessions.create({
