@@ -17,12 +17,12 @@ function SuccessPage() {
   }, [orderNumber, clearBasket]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50">
-      <div className="mx-4 w-full max-w-2xl rounded-xl bg-white p-12 shadow-lg">
+    <div className="bg-background flex min-h-screen flex-col items-center justify-center">
+      <div className="bg-card mx-4 w-full max-w-2xl rounded-xl p-12 shadow-lg">
         <div className="mb-8 flex justify-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
+          <div className="bg-primary/10 flex h-16 w-16 items-center justify-center rounded-full">
             <svg
-              className="h-8 w-8 text-green-600"
+              className="text-primary h-8 w-8"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -36,26 +36,26 @@ function SuccessPage() {
             </svg>
           </div>
         </div>
-        <h1 className="mb-6 text-center text-4xl font-bold">
+        <h1 className="text-foreground mb-6 text-center text-4xl font-bold">
           Thank You for Your Order!
         </h1>
-        <div className="mb-6 border-t border-b border-gray-200 py-6">
-          <p className="mb-4 text-lg text-gray-700">
-            Your order has been placed and will be shipped by our slaves.
+        <div className="border-border mb-6 border-t border-b py-6">
+          <p className="text-foreground mb-4 text-lg">
+            Your order has been placed and will be shipped by our team.
           </p>
           <div className="space-y-2">
             {orderNumber && (
-              <p className="flex items-center space-x-5 text-gray-600">
+              <p className="text-muted-foreground flex items-center space-x-5">
                 <span>Order Number:</span>
-                <span className="font-mono text-sm text-green-600">
+                <span className="text-primary font-mono text-sm">
                   {orderNumber}
                 </span>
               </p>
             )}
             {sessionId && (
-              <p className="flex items-center space-x-5 text-gray-600">
+              <p className="text-muted-foreground flex items-center space-x-5">
                 <span>Transaction ID:</span>
-                <span className="font-mono text-sm text-green-600">
+                <span className="text-primary font-mono text-sm">
                   {sessionId}
                 </span>
               </p>
@@ -63,11 +63,11 @@ function SuccessPage() {
           </div>
         </div>
         <div className="space-y-4">
-          <p className="text-gray-600">
+          <p className="text-muted-foreground">
             You will receive an email with the details of your order.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
-            <Button asChild className="bg-green-600 hover:bg-green-700">
+            <Button asChild className="bg-primary hover:bg-primary/80">
               <Link href="/orders">View Order Details</Link>
             </Button>
             <Button asChild variant="outline">

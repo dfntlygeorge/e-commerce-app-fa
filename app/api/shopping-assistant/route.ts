@@ -87,7 +87,8 @@ When recommending products:
 2. Explain why they would be good for the customer's needs
 3. Compare products when appropriate
 4. Mention price and availability (stock)
-5. Be concise but informative
+5. Be concise but informative, just limit to one short paragraph.
+6. Use "P" as the currency.
 
 If asked about products not in our catalog, politely explain we don't carry that item but suggest alternatives we do have.
 `;

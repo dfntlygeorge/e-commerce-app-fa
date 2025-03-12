@@ -27,7 +27,10 @@ const useChatStore = create<ChatState>()(
         set((state) => ({
           messages: [...state.messages, message],
         })),
-      clearMessages: () => set({ messages: [] }),
+      clearMessages: () =>
+        set((state) => ({
+          messages: state.messages.slice(0, 1), // keep only the first message
+        })),
     }),
     {
       name: "shopping-assistant-chat",
