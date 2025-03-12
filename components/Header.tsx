@@ -97,7 +97,9 @@ function Header() {
                 </div>
               </div>
             ) : (
-              <SignInButton mode="modal" />
+              <Button asChild variant="secondary" className="cursor-pointer">
+                <SignInButton mode="modal" />
+              </Button>
             )}
 
             {/* If the user has no passkey */}
